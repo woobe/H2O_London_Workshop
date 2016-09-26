@@ -2,7 +2,6 @@
 # Step 1: Install R Packages for Workshop
 # ------------------------------------------------------------------------------
 
-
 # ------------------------------------------------------------------------------
 # Install "h2o" for machine learning
 # Reference: http://www.h2o.ai/download/h2o/r
@@ -19,7 +18,13 @@ for (pkg in pkgs) {
 }
 
 # Now we download, install and initialize the H2O package for R.
-install.packages("h2o", type="source", repos=(c("http://h2o-release.s3.amazonaws.com/h2o/rel-turing/7/R")))
+install.packages("h2o",
+                 type="source",
+                 repos=(c("http://h2o-release.s3.amazonaws.com/h2o/rel-turing/7/R")))
+
+# Quick test
+suppressPackageStartupMessages(library(h2o))
+h2o.init(nthreads = -1)
 
 
 # ------------------------------------------------------------------------------
@@ -28,7 +33,9 @@ install.packages("h2o", type="source", repos=(c("http://h2o-release.s3.amazonaws
 # ------------------------------------------------------------------------------
 
 # Install stable version (1.8)
-install.packages("https://h2o-release.s3.amazonaws.com/h2o-ensemble/R/h2oEnsemble_0.1.8.tar.gz", repos = NULL)
+install.packages(
+  "https://h2o-release.s3.amazonaws.com/h2o-ensemble/R/h2oEnsemble_0.1.8.tar.gz",
+  repos = NULL)
 
 # Quick test
 library(h2oEnsemble)
