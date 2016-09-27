@@ -42,10 +42,13 @@ model_gbm1 <- h2o.gbm(x = features, y = target,
 # GBM with manual settings
 model_gbm2 <- h2o.gbm(x = features, y = target,
                      training_frame = secom_train,
+                     validation_frame = secom_test,
                      model_id = "gbm_tuning", # define an ID
-                     ntrees = 100,      # default = 50
-                     max_depth = 7,     # default = 5
-                     learn_rate = 0.05)  # default = 0.1
+                     ntrees = 40,             # default = 50
+                     max_depth = 7,           # default = 5
+                     sample_rate = 0.75,      # default = 1
+                     col_sample_rate = 0.75,  # default = 1
+                     learn_rate = 0.05)       # default = 0.1
 
 # Use R / Flow to look at models
 print(summary(model_gbm1))
@@ -58,4 +61,13 @@ print(summary(model_gbm2))
 
 h2o.performance(model_gbm1, newdata = secom_test)
 h2o.performance(model_gbm2, newdata = secom_test)
+
+
+# ------------------------------------------------------------------------------
+# Making predictions
+# ------------------------------------------------------------------------------
+
+yhat_test <- h2o.predict(model_gbm2, secom_test)
+print(head(yhat_test))
+print(summary(yhat_test))
 
