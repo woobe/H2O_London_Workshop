@@ -24,9 +24,9 @@ secom <- h2o.importFile(path = "./data/secom.csv", destination_frame = "secom")
 
 # Basic exploratory analysis
 print(dim(secom)) # 1567 x 599
-print(summary(secom))
+print(summary(secom$Classification))
 # alternatively, use H2O flow to look at data (localhost:54321)
 
 # Convert Classification to factor
 secom$Classification <- as.factor(secom$Classification)
-
+print(summary(secom$Classification))
