@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Step 3: Train Simple Models
+# Step 3: Train and Evaluate Simple Models
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
@@ -13,11 +13,6 @@ h2o.init(nthreads = -1)
 # Import data from a local CSV file
 # Source: https://archive.ics.uci.edu/ml/machine-learning-databases/secom/
 secom <- h2o.importFile(path = "./data/secom.csv", destination_frame = "secom")
-
-# Basic exploratory analysis
-print(dim(secom)) # 1567 x 599
-print(summary(secom))
-# alternatively, use H2O flow to look at data (localhost:54321)
 
 # Convert Classification to factor
 secom$Classification <- as.factor(secom$Classification)
@@ -52,6 +47,9 @@ summary(secom_test$Classification) # 581 : 42 ... % of 1 = 0.07228916
 # ------------------------------------------------------------------------------
 # Train H2O models with default value
 # ------------------------------------------------------------------------------
+
+# Turn off progress bar (if you want to ...)
+# h2o.no_progress()
 
 # GBM
 model_gbm <- h2o.gbm(x = features, y = target,
