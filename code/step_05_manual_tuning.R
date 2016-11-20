@@ -36,8 +36,7 @@ model_dnn1 <- h2o.deeplearning(x = features,
                                training_frame = secom,
                                nfolds = 5,
                                seed = 1234,
-                               fold_assignment = "Stratified",
-                               score_duty_cycle = 1)
+                               fold_assignment = "Stratified")
 print(model_dnn1)
 
 # Deep Learning model with manual settings
@@ -48,13 +47,12 @@ model_dnn2 <- h2o.deeplearning(x = features,
                                nfolds = 5,
                                seed = 1234,
                                fold_assignment = "Stratified",
-                               score_duty_cycle = 1,
                                
                                # Manual tweaks
                                activation = "RectifierWithDropout",
                                balance_classes = TRUE,
                                hidden = c(50, 50, 50),
-                               epochs = 50)
+                               epochs = 100)
 print(model_dnn2)
 
 # Use R / Flow to look at models
@@ -66,6 +64,6 @@ print(model_dnn2)
 # ------------------------------------------------------------------------------
 
 yhat <- h2o.predict(model_dnn2, secom)
-print(head(yhat))
+print(head(yhat, 40))
 print(summary(yhat))
 
