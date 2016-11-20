@@ -36,10 +36,10 @@ print(features)
 # Split
 # i.e. using 60% of data for training and 40% for test
 secom_splits <- h2o.splitFrame(data = secom, ratios = 0.6, seed = 1234)
-secom_train <- secom_splits[[1]]
-secom_test  <- secom_splits[[2]]
+secom_train <- secom_splits[[1]]    # optional step
+secom_test  <- secom_splits[[2]]    # optional step
 
-# Check
+# Check ratio
 summary(secom_train$Classification) # 882 : 62 ... % of 1 = 0.07029478
 summary(secom_test$Classification) # 581 : 42 ... % of 1 = 0.07228916
 
