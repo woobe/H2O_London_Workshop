@@ -19,21 +19,29 @@ d_iris <- as.h2o(iris)
 head(d_iris)
 summary(d_iris)
 
-
 # Define Targets and Features
 target <- "Species"
 features <- setdiff(colnames(d_iris), c("Species"))
-
 
 # ------------------------------------------------------------------------------
 # Train a H2O Model
 # ------------------------------------------------------------------------------
 
-# Train a Deep Learning model
-model <- h2o.deeplearning(x = features,
-                          y = target,
-                          model_id = "iris_deep_learning",
-                          training_frame = d_iris)
+# Train three basic H2O models 
+model_dnn <- h2o.deeplearning(x = features,
+                              y = target,
+                              model_id = "iris_deep_learning",
+                              training_frame = d_iris)
+
+model_drf <- h2o.randomForest(x = features,
+                              y = target,
+                              model_id = "iris_random_forest",
+                              training_frame = d_iris)
+
+model_gbm <- h2o.gbm(x = features,
+                     y = target,
+                     model_id = "iris_gbm",
+                     training_frame = d_iris)
 
 
 # ------------------------------------------------------------------------------
