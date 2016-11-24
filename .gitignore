@@ -35,3 +35,4 @@ vignettes/*.pdf
 
 # Other stuff
 *.Rproj
+/slides/temp_files/*
